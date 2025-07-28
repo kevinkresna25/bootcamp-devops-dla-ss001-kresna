@@ -1,1 +1,0 @@
-Ini hasil merge dari feature dan development menggunakan nano di git bash 
