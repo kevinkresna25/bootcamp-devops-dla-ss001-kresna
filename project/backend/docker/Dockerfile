@@ -14,7 +14,7 @@ FROM python:3.11-alpine
 
 WORKDIR /app
 
-COPY src/ .
+COPY app.py .
 COPY --from=builder /install /usr/local
 
 EXPOSE 5000
