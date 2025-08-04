@@ -27,11 +27,20 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build & (Push if on main branch)
+      - name: Build & (Push) Backend Image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: docker/Dockerfile
+          context: project/backend
+          file: project/backend/docker/Dockerfile
           push: ${{ github.ref == 'refs/heads/main' }}
-          tags: ${{ secrets.DOCKER_USERNAME }}/bootcamp-devops-kresna:v2
+          tags: ${{ secrets.DOCKER_USERNAME }}/bootcamp-devops-kresna-backend:v2
+          platforms: linux/amd64
+
+      - name: Build & (Push) Frontend Image
+        uses: docker/build-push-action@v5
+        with:
+          context: project/frontend
+          file: project/frontend/docker/Dockerfile
+          push: ${{ github.ref == 'refs/heads/main' }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/bootcamp-devops-kresna-frontend:v2
           platforms: linux/amd64
